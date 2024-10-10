@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Search and Filtering</title>
+    <link rel="stylesheet" href="../fourthcss.css">
+</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Madimi+One&family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Sahitya:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Kodchasan:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Madimi+One&family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Sahitya:wght@400;700&display=swap" rel="stylesheet">
+<body>
+    <header>
+        <h1>Product Search and Filtering</h1>
+        <input type="text" id="searchInput" placeholder="Search products...">
+
+        <select id="categoryFilter">
+            <option value="">All Categories</option>
+            <option value="electronics">Wooden</option>
+            <option value="clothing">Clothing</option>
+        </select>
+        <input type="number" id="minPrice" placeholder="Min Price">
+        <input type="number" id="maxPrice" placeholder="Max Price">
+        <button onclick="applyFilters()">Apply Filters</button>
+
+        <select id="sortOptions">
+            <option value="relevance">Relevance</option>
+            <option value="popularity">Popularity</option>
+            <option value="price-low">Price (Low to High)</option>
+            <option value="price-high">Price (High to Low)</option>
+        </select>
+    </header>
+    <main id="productList">
+        <!-- Product will be displayed here -->
+    </main>
+
+    <script>
+        const products = [
+    { name: "Wooden hair Comb", category: "Wooden", price: 100, popularity: 5 },
+    { name: "Dinner set", category: "Crockery", price: 50, popularity: 3 },
+];
+
+function applyFilters() {
+    const searchInput = document.getElementById("searchInput").value.toLowerCase();
+    const categoryFilter = document.getElementById("categoryFilter").value.toLowerCase();
+    const minPrice = document.getElementById("minPrice").value;
+    const maxPrice = document.getElementById("maxPrice").value;
+
+    const filteredProducts = products.filter(product => {
+        return (product.name.toLowerCase().includes(searchInput) || searchInput === "") &&
+               (product.category.toLowerCase() === categoryFilter || categoryFilter === "") &&
+               (product.price >= (minPrice || 0) && product.price <= (maxPrice || Infinity));
+    });
+
+    const sortOption = document.getElementById("sortOptions").value;
+    sortProducts(filteredProducts, sortOption);
+}
+
+function sortProducts(products, sortOption) {
+    switch (sortOption) {
+        case "relevance":
+            break;
+        case "popularity":
+            products.sort((a, b) => b.popularity - a.popularity);
+            break;
+        case "price-low":
+            products.sort((a, b) => a.price - b.price);
+            break;
+        case "price-high":
+            products.sort((a, b) => b.price - a.price);
+            break;
+        default:
+            break;
+    }
+    displayProducts(products);
+}
+
+function displayProducts(products) {
+    const productList = document.getElementById("productList");
+    productList.innerHTML = "";
+
+    products.forEach(product => {
+        const productElement = document.createElement("div");
+        productElement.classList.add("product");
+        productElement.innerHTML = `
+            <h2>${product.name}</h2>
+            <p>Category: ${product.category}</p>
+            <p>Price: $${product.price}</p>
+        `;
+        productList.appendChild(productElement);
+    });
+}
+displayProducts(products);
+
+    </script>
+</body>
+</html>

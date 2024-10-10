@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handmade Creations by Mr. Piyush</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e3ac4d;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #edd940;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .profile-img {
+            display: block;
+            margin: 0 auto;
+            border-radius: 10px;
+            width: 300px;
+            height: auto;
+            object-fit: cover;
+            object-position: center;
+        }
+        .about {
+            text-align: justify;
+        }
+        .products {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://www.liveabout.com/thmb/kF-kplZ5AfdW3VEhuG539m4tUI8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-667156305-59befb3daf5d3a00102437f8.jpg" alt="Profile Picture" class="profile-img">
+        <h1>User Profile</h1>
+        <p>Name: <%= username %></p>
+
+
+        <div class="about">
+            <h2>About Me</h2>
+            <p>Hello! I'm Mr. Piyush, and I'm passionate about creating unique handmade products. Each item is crafted with love and attention to detail, making them perfect for adding a personal touch to your life or gifting to someone special.</p>
+            <p>My journey in crafting began several years ago when I discovered my love for working with my hands. Since then, I've honed my skills and experimented with various techniques to bring you high-quality, one-of-a-kind creations.</p>
+        </div>
+        <div class="products">
+            <h2>Featured Products</h2>
+            <!-- Insert featured products here -->
+            <p>Check out my <a href="/login/addproduct">full collection</a> for more handmade treasures!</p>
+        </div>
+        <h2>Contact Me</h2>
+        <p>Email: piyush@example.com</p>
+        <p>Phone: +91 1234567890</p>
+    </div>
+</body>
+</html>

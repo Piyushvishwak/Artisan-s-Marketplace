@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css"
+    />
+    <link rel="stylesheet" href="/style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Madimi+One&family=Sahitya:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  <style>
+    .switch{
+      position: relative;
+      display: inline-block;
+      width: 45px;
+      height: 25px;
+      margin:-20px 10px ;
+      top: -15px;      
+    }
+    .error-message {
+      color: red;
+    }
+    .switch input {display:none}
+    .slider:before{
+      position: absolute;
+      content: "";
+      height: 21px;
+      width: 21px;
+      left:2px;
+      bottom: 2px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50px;
+    }
+    input:checked+.slider{
+      background-color: blue;
+    }
+    input:checked+.slider::before{
+      transform: translateX(20px);
+    }
+    .slider{
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background-color:#9facf3;
+      transition: .4s;
+      border-radius: 34px;
+    }
+  </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Login</h2>
+      <form action="/login" method="post">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter name"
+            required
+            autocomplete="off"
+            onchange="checkName()"
+          />
+          <p class="error-message" id="name-error"></p>
+        </div>
+        <!-- email -->
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter Email"
+            required
+            autocomplete="off"
+            onchange="checkEmail()"
+            class="input-field"
+          />
+          <p class="error-message" id="email-error"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="n">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="password"
+            onchange="checkPass()"
+            required
+          />
+          <p class="error-message" id="password-error"></p>
+        </div>
+        <button type="submit" class="submit-btn">Login</button>
+      </form>
+      <p>Don't have account? <a href="/signup">Sign Up</a><br /><br /><br /></p>
+      
+    </form>
+    <b>Seller</b>
+      <label class="switch">
+      <input type="checkbox">
+          <span class="slider"></span>
+      </label>
+      
+      <div class="social-login">
+        <h3>log in via</h3>
+        <div class="social-icons">
+          <a href="https://developers.facebook.com/docs/instagram-basic-display-api/" class="social-login__icon fab fa-instagram"></a>
+          <a href="https://developers.facebook.com/docs/instagram-basic-display-api/" class="social-login__icon fab fa-facebook"></a>
+          <a href="https://developer.twitter.com/en/docs/authentication/oauth-2-0" class="social-login__icon fab fa-twitter"></a>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const userName = req.body.name;
+      localStorage.setItem('userName', userName); 
+      res.status(200).json({ userName: userName });
+
+    function checkName() {
+      const nameInput = document.getElementById("name").value;
+      const nameError = document.getElementById("name-error");
+
+      nameError.innerHTML = "";
+
+      if (nameInput.trim() === "") {
+        nameError.innerHTML = "*Please enter your name.";
+      }
+      if (!isNaN(nameInput)) {
+        nameError.innerHTML = "*Must have alphabets, not numbers.";
+      }
+    }
+
+    function checkPass() {
+      const passwordInput = document.getElementById("password").value;
+      const passwordError = document.getElementById("password-error");
+
+      passwordError.innerHTML = "";
+
+      if (passwordInput.trim() === "") {
+        passwordError.innerHTML = "*Please enter your password.";
+      }
+      if (passwordInput.length < 8) {
+        passwordError.innerHTML = "*Password must have 8 characters.";
+      }
+      if (passwordInput.search(/[a-z]/) < 0) {
+        passwordError.innerHTML =
+          "*Password must contain at least one lowercase letter.";
+      }
+      if (passwordInput.search(/[A-Z]/) < 0) {
+        passwordError.innerHTML =
+          "*Password must contain at least one uppercase letter.";
+      }
+      if (passwordInput.search(/[0-9]/) < 0) {
+        passwordError.innerHTML =
+          "*Password must contain at least one number.";
+      }
+    }
+    function checkEmail(){
+                var em = document.getElementById('email').value;
+                if(!em){
+                    document.getElementById('email-error').innerHTML="*fill an email id."
+                }
+
+                const atIndex = em.indexOf('@');
+
+                if (atIndex === -1) {
+                    document.getElementById('email-error').innerHTML="*must contain @ symbol."
+                }
+
+                const username = em.slice(0, atIndex);
+                const domain = em.slice(atIndex + 1);
+
+                if (!username || !domain) {
+                    document.getElementById('email-error').innerHTML="*must contain a username and a domain."
+                }
+
+                const dotIndex = domain.indexOf('.');
+
+                if (dotIndex === -1){
+                    document.getElementById('email-error').innerHTML="*must contain a dot(.)."
+                }
+
+                if (dotIndex === 0 || dotIndex === domain.length - 1) {
+                    document.getElementById('email-error').innerHTML="*dot cannot be at the beginning or ending."
+                }
+            }
+  </script>
+</html>

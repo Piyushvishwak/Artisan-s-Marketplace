@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - Handmade Marketplace (Buyer)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: bisque;
+}
+.logo {
+    display: flex;
+    align-items: center; 
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+} 
+
+
+header {
+    background-color: rgb(233, 165, 82);
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    height: 50px;
+    width: 110px;
+    border-radius: 10px;
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+main {
+    padding: 20px;
+}
+
+.notifications {
+    background-color:antiquewhite;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.notifications h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.notifications ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.notification-type {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.notification-summary {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.notification-date {
+    color: #777;
+    font-size: 12px;
+}
+
+</style>
+<body>
+    <header>
+        <div class="logo">
+            <!-- Your marketplace logo here -->
+            <img src="../hack_images/orglogo.png" alt="Handmade Marketplace">
+            <h3>LiveSuperb</h3>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/login/fourth1">Product</a></li>
+                <li><a href="/login/cart">Cart</a></li>
+                <li><a href="/login/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="notifications">
+            <h1>Notifications</h1>
+            <ul>
+                <li>
+                    <div class="notification-type">Order Update</div>
+                    <div class="notification-summary">Your order #12345 has been shipped.</div>
+                    <div class="notification-date">April 27, 2024</div>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+</body>
+</html>

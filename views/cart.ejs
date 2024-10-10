@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart Page</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+      body {
+        padding-top: 56px;
+        text-align: center;
+        padding-top: 72px;
+        background-color: antiquewhite;
+      }
+      #dltbtn {
+        border-radius: 4px;
+        font-size: small;
+        background-color: rgb(255, 75, 75);
+      }
+      .cart-items-container {
+        background-color: rgb(244, 206, 122);
+        border: 2px solid black;
+        padding: 10px;
+        border-radius: 6px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: bisque;
+      }
+      .product-image {
+        width: 50px;
+        height: auto;
+        display: block;
+        margin: auto;
+      }
+      img {
+        vertical-align: middle;
+        border-style: none;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/login/about">LiveSuperb</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/login/home"
+                >Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login/contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login/fourth1">Shop</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h1>Your Cart</h1>
+
+      <div class="cart-count" id="cartCount">
+        <span><b>Total items in the cart: </b></span
+        ><span id="itemCount">0</span>
+      </div>
+      <hr />
+      <div id="cartItemsContainer" class="cart-items-container">
+        <table>
+          <tr>
+            <th>IMAGE</th>
+            <th>ITEMS</th>
+            <th>PRICE</th>
+            <th>QUANTITY</th>
+            <th>REMOVE</th>
+          </tr>
+          <tbody id="cartItems"></tbody>
+        </table>
+      </div>
+
+      <div class="total-price">
+        <b><big>Total Price: </big></b> Rs. <span id="totalPrice">0</span>
+      </div>
+      <br />
+      <button
+        id="checkoutBtn"
+        class="btn btn-primary"
+        onclick="redirectToCheckout()"
+      >
+        Checkout
+      </button>
+    </div>
+
+    <script>
+      function createQuantityDropdown(index) {
+        var dropdown = document.createElement("select");
+        dropdown.id = "quantityDropdown_" + index;
+        dropdown.classList.add("quantity-dropdown");
+        for (var i = 1; i <= 10; i++) {
+          var option = document.createElement("option");
+          option.text = i;
+          option.value = i;
+          dropdown.appendChild(option);
+        }
+        dropdown.style.marginLeft = "10px";
+
+        dropdown.addEventListener("change", function () {
+          updateTotalPrice();
+        });
+
+        return dropdown;
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        var count = localStorage.getItem("cartCount") || 0;
+        document.getElementById("itemCount").innerText = count;
+
+        var totalPrice = localStorage.getItem("totalPrice") || 0;
+        document.getElementById("totalPrice").innerText = totalPrice;
+
+        if (count == 0) {
+          document.getElementById("totalPrice").innerText = 0;
+        }
+
+        var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        var cartItemsContainer = document.getElementById("cartItems");
+        cartItemsContainer.innerHTML = "";
+        cartItems.forEach(function (item, index) {
+          var row = document.createElement("tr");
+
+          var imageCell = document.createElement("td");
+          var smallImage = document.createElement("img");
+          smallImage.src = item.smallImageUrl;
+          smallImage.style.width = "50px";
+          smallImage.style.height = "50px";
+          imageCell.appendChild(smallImage);
+          row.appendChild(imageCell);
+
+          var itemNameCell = document.createElement("td");
+          itemNameCell.textContent = item.name;
+          var priceCell = document.createElement("td");
+          priceCell.textContent = "Rs." + item.price;cartItems
+          var quantityCell = document.createElement("td");
+          var quantityDropdown = createQuantityDropdown(index);
+          quantityCell.appendChild(quantityDropdown);
+          var removeCell = document.createElement("td");
+          var removeBtn = document.createElement("button");
+          removeBtn.textContent = "Remove";
+          removeBtn.id = "dltbtn";
+          removeBtn.onclick = function () {
+            removeItem(index, item.price);
+          };
+          removeCell.appendChild(removeBtn);
+
+          row.appendChild(itemNameCell);
+          row.appendChild(priceCell);
+          row.appendChild(quantityCell);
+          row.appendChild(removeCell);
+
+          cartItemsContainer.appendChild(row);
+        });
+      });
+
+      function updateTotalPrice() {
+        var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+        var totalPrice = 0;
+        cartItems.forEach(function (item, index) {
+          var selectedQuantity = parseInt(
+            document.getElementById("quantityDropdown_" + index).value
+          );
+          var currentItemPrice = item.price * selectedQuantity;
+          totalPrice += currentItemPrice;
+        });
+
+        localStorage.setItem("totalPrice", totalPrice);
+
+        document.getElementById("totalPrice").innerText = totalPrice;
+      }
+
+      function removeItem(index, price) {
+        var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+        cartItems.splice(index, 1);
+
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+        var totalPrice = parseInt(localStorage.getItem("totalPrice")) || 0;
+        localStorage.setItem("totalPrice", totalPrice - price);
+
+        var count = parseInt(localStorage.getItem("cartCount")) || 0;
+        localStorage.setItem("cartCount", count - 1);
+
+        if (cartItems.length === 0) {
+          localStorage.setItem("totalPrice", 0);
+          localStorage.setItem("cartCount", 0);
+        }
+
+        location.reload();
+      }
+
+      function redirectToCheckout() {
+        var totalPrice = localStorage.getItem("totalPrice") || 0;
+        window.location.href = "/login/payment?totalPrice=" + totalPrice;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,141 @@
+
+.form-container {
+    font-family: "Exo 2", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #0e19e8;
+    border-radius: 5px;
+  }
+  
+  html, body {
+    height: 90%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } 
+ 
+  .form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 93%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    background-color: #0056b3;
+  }
+  body{
+    background-color: #dbd2f4;
+  }
+  .social-login {    
+    position: relative;
+    text-align: center;
+    /* bottom: 40%;    */
+    left: 30%;
+    color: #fff;
+    margin-top: -80px;
+    line-height: 0%;
+  }
+
+  p{
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .social-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+  
+  .social-login__icon {
+    padding: 20px 10px;
+    color: #fff;
+    text-decoration: none;	
+    text-shadow: 0px 0px 8px #7875B5;
+  }
+  
+  .social-login__icon:hover {
+    transform: scale(1.5);	
+  }
+  .switch{
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 25px;
+    margin:-20px 10px ;
+    top: -15px;
+    
+  }
+  .error-message {
+  color: red;
+}
+
+  .switch input {display:none}
+  .slider:before{
+    position: absolute;
+    content: "";
+    height: 21px;
+    width: 21px;
+    left:2px;
+    bottom: 2px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50px;
+  }
+  input:checked+.slider{
+    background-color: blue;
+  }
+  input:checked+.slider::before{
+    transform: translateX(20px);
+  }
+
+  .slider{
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color:#9facf3;
+    transition: .4s;
+    border-radius: 34px;
+  }
+  .input-field {
+    width: 93%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  

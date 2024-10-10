@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Listings - Artisan Marketplace</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="addproduct.css" />
+  </head>
+  <style>
+    body {
+      background-color: rgb(243, 206, 161);
+    }
+  </style>
+  <body>
+    <header class="bg-dark text-white">
+      <div class="container">
+        <h1>Artisan Marketplace</h1>
+        <nav>
+          <ul class="nav">
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Artisans</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="py-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Product Listings</h2>
+
+        <div class="mb-4">
+          <h4>Add New Product</h4>
+          <form id="productForm">
+            <div class="form-group">
+              <label for="productName">Product Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="productName"
+                placeholder="Enter product name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="productDescription">Description</label>
+              <textarea
+                class="form-control"
+                id="productDescription"
+                rows="3"
+                placeholder="Enter product description"
+                required
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label for="productCategory">Category</label>
+              <input
+                type="text"
+                class="form-control"
+                id="productCategory"
+                placeholder="Enter product category"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="productPrice">Price</label>
+              <input
+                type="number"
+                class="form-control"
+                id="productPrice"
+                placeholder="Enter product price"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="productImage">Image URL</label>
+              <input
+                type="text"
+                class="form-control"
+                id="productImage"
+                placeholder="Enter product image URL"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Add Product</button>
+          </form>
+        </div>
+
+        <div id="productList" class="row">
+          <!-- Products will be displayed here -->
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-dark text-white py-4">
+      <div class="container">
+        <p class="text-center">
+          &copy; 2024 Artisan Marketplace. All rights reserved.
+        </p>
+      </div>
+    </footer>
+    <script>
+      function clearLocalStorage() {
+        localStorage.removeItem("products");
+        location.reload();
+      }
+    
+      function showAlert(message, color) {
+        const alertBox = document.createElement("div");
+        alertBox.className = "alert";
+        alertBox.style.backgroundColor = color;
+        alertBox.textContent = message;
+        alertBox.style.position = "fixed";
+        alertBox.style.top = "20px";
+        alertBox.style.right = "20px";
+        alertBox.style.padding = "10px";
+        alertBox.style.borderRadius = "5px";
+        alertBox.style.color = "white";
+        alertBox.style.zIndex = "9999";
+        document.body.appendChild(alertBox);
+        setTimeout(() => {
+          alertBox.remove();
+        }, 3000);
+      }
+    
+      document.addEventListener("DOMContentLoaded", function () {
+        const productForm = document.getElementById("productForm");
+        const productList = document.getElementById("productList");
+    
+        const savedProducts =
+          JSON.parse(localStorage.getItem("products")) || [];
+    
+        function renderProducts() {
+          productList.innerHTML = "";
+          savedProducts.forEach((product, index) => {
+            const productCard = document.createElement("div");
+            productCard.classList.add("col-md-4");
+    
+            productCard.innerHTML = `
+            <div class="product-card">
+                <img src="${product.image}" alt="${product.name}" class="img-fluid">
+                <div class="card-body">
+                    <h5>${product.name}</h5>
+                    <p>${product.description}</p>
+                    <p><strong>Category:</strong> ${product.category}</p>
+                    <p><strong>Price:</strong> $${product.price}</p>
+                    <button class="btn btn-primary" onclick="showAlert('Successfully deployed', 'green')">Deploy Product</button>
+                    <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+                </div>
+            </div>`;
+    
+            const deleteButton = productCard.querySelector(".delete-btn");
+            deleteButton.addEventListener("click", function () {
+              deleteProduct(index);
+            });
+    
+            productList.appendChild(productCard);
+          });
+        }
+    
+        renderProducts();
+    
+        // Function to delete a product
+        function deleteProduct(index) {
+          savedProducts.splice(index, 1);
+          localStorage.setItem("products", JSON.stringify(savedProducts));
+          renderProducts();
+        }
+    
+        productForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const productName = document.getElementById("productName").value;
+          const productDescription =
+            document.getElementById("productDescription").value;
+          const productCategory =
+            document.getElementById("productCategory").value;
+          const productPrice = document.getElementById("productPrice").value;
+          const productImage = document.getElementById("productImage").value;
+    
+          // Create a new product object
+          const product = {
+            name: productName,
+            description: productDescription,
+            category: productCategory,
+            price: productPrice,
+            image: productImage,
+          };
+    
+          savedProducts.push(product);
+          localStorage.setItem("products", JSON.stringify(savedProducts));
+          renderProducts();
+          productForm.reset();
+        });
+      });
+    </script>
+    
+  </body>
+</html>

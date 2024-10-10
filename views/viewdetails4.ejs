@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Kodchasan:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Madimi+One&family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Sahitya:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            padding-top: 56px;
+            font-family: "Kodchasan", sans-serif;
+            font-weight: 200;
+            font-style: normal;
+        }
+        @media (min-width: 768px) {
+            body {
+                padding-top: 72px;
+                background-color: antiquewhite;
+            }
+        }
+        .product-details,
+        .details-section {
+            width: 45%;
+            display: inline-block;
+            vertical-align: top;
+        }
+        .center-text {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Item Details</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Cart</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 center-text">
+                <h2 class="mt-5">Product Details</h2>
+                <p class="lead">Details about the selected product.</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-lg-6 product-details">
+                <div class="card" style="width: 18rem;">
+                    <img src="../featured/6.avif" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Decor</h5>
+                        <p class="card-text">Knitted Sunflowers Set</p>
+                        <p class="card-text">Price: Rs.799</p>
+                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 details-section">
+                <h2>Additional Details</h2>
+                <ul>
+                    <li><strong>Material:</strong> Wool</li>
+                    <li><strong>Waterproof:</strong> No</li>
+                    <li><strong>Size:</strong> Small</li>
+                    <li><strong>Discounts:</strong> 10% off on orders above Rs. 2000</li>
+                    <li><strong>Coupons Available:</strong> SPRINGSALE10 (10% off)</li>
+                    <li><strong>Seller Company:</strong> PQR Enterprises</li>
+                    <li><strong>Ratings:</strong> ★★★★☆ (4.4)</li>
+                    <li><strong>Product Code:</strong> ABC785</li>
+                    <li><strong>Similar Products:</strong> <a href="#">Product 1</a>, <a href="#">Product 2</a>, <a href="#">Product 3</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
