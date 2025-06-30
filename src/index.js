@@ -9,8 +9,8 @@ const session = require("express-session");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(session({ 
-  secret: 'secret', 
+app.use(session({
+  secret: 'secret',
   resave: false,
   saveUninitialized: true
 }));
@@ -49,7 +49,7 @@ app.post("/login", async (req, res) => {
   try {
     const check = await collection.findOne({ name: req.body.name });
     if (!check) {
-      res.send("User not found");
+      return res.send("User not found");
     }
     const isPasswordMatch = await bcrypt.compare(
       req.body.password,
@@ -63,12 +63,12 @@ app.post("/login", async (req, res) => {
         
         res.cookie("username", check.name);
         res.cookie("useremail", check.email);
-        res.render("preloader", { username: check.name });
+        return res.render("preloader", { username: check.name });
     } else {
-      res.send("Invalid password");
+      return res.send("Invalid password");
     }
   } catch (err) {
-    res.send("Wrong details");
+    return res.send("Wrong details");
   }
 });
 
